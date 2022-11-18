@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: No rights reserved
+
+data/template.gschema.xml.in
+data/template.metainfo.xml.in.in
+data/template.plugin.desktop.in
+src/example-device-plugin.c
+src/example-device-preferences-page.c
+src/example-device-preferences-page.ui
+

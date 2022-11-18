@@ -1,0 +1,46 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  flatpak:
+    name: Test Build
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/andyholmes/flatter/gnome:43
+      options: --privileged
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Setup GPG
+        id: gpg
+        uses: crazy-max/ghaction-import-gpg@v5
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Setup Flatpak
+        run: |
+          flatpak remote-add --if-not-exists \
+                  valent https://valent.andyholmes.ca/valent.flatpakrepo
+
+      - name: Build
+        uses: andyholmes/flatter@main
+        with:
+          files: |
+            ca.andyholmes.Valent.Plugin.example.json
+          gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
+          flatpak-builder-args: |
+            --install-deps-from=valent
+          flatpak-build-bundle-args: |
+            --runtime
+          upload-bundles: true

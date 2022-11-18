@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+<!-- SPDX-FileCopyrightText: No rights reserved -->
+
+<gresources>
+  <gresource prefix="/plugins/@plugin_module@">
+    <file preprocess="xml-stripblanks">example-device-preferences-page.ui</file>
+  </gresource>
+  <gresource prefix="/ca/andyholmes/Valent/icons">
+    <file preprocess="xml-stripblanks" alias="scalable/apps/valent-plugin-@plugin_module@-symbolic.svg">data/template.svg</file>
+  </gresource>
+</gresources>
+

@@ -1,0 +1,9 @@
+*~
+_build*
+
+# meson wraps
+subprojects/valent/
+
+# Flatpak
+*.flatpak
+.flatpak-builder

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="addon">
+  <id>ca.andyholmes.Valent.Plugin.@plugin_module@</id>
+  <extends>ca.andyholmes.Valent</extends>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <content_rating type="oars-1.1" />
+
+  <name>Plugin Name</name>
+  <summary>Plugin Description</summary>
+  <developer_name>@plugin_author@</developer_name>
+  <update_contact>@plugin_email@</update_contact>
+  <url type="homepage">@plugin_url@</url>
+  <translation type="gettext">@gettext_package@</translation>
+</component>
+

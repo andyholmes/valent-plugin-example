@@ -1,0 +1,6 @@
+[wrap-git]
+directory=valent
+url=https://github.com/andyholmes/valent.git
+revision=main
+depth=1
+

@@ -1,0 +1,35 @@
+{
+    "id": "ca.andyholmes.Valent.Plugin.example",
+    "branch": "master",
+    "runtime": "ca.andyholmes.Valent",
+    "runtime-version": "master",
+    "sdk": "org.gnome.Sdk//43",
+    "build-extension": true,
+    "appstream-compose": false,
+    "cleanup": [],
+    "build-options": {
+        "prefix": "/app/extensions/example"
+    },
+    "modules": [
+        {
+            "name": "valent-plugin-example",
+            "buildsystem" : "meson",
+            "builddir" : true,
+            "cleanup": [],
+            "config-opts" : [
+                "--prefix=/app/extensions/example",
+                "--buildtype=debugoptimized"
+            ],
+            "post-install": [
+                "appstream-compose --basename=ca.andyholmes.Valent.Plugin.example --prefix=${FLATPAK_DEST} --origin=flatpak ca.andyholmes.Valent.Plugin.example",
+                "glib-compile-schemas --targetdir=${FLATPAK_DEST}/lib/valent/plugins/example ${FLATPAK_DEST}/share/glib-2.0/schemas"
+            ],
+            "sources" : [
+                {
+                    "type" : "dir",
+                    "path" : "."
+                }
+            ]
+        }
+    ]
+}

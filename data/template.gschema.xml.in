@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+<!-- SPDX-FileCopyrightText: No rights reserved -->
+
+<schemalist gettext-domain="@gettext_package@">
+  <schema id="ca.andyholmes.Valent.Plugin.@plugin_module@">
+    <key name="boolean-setting" type="b">
+      <default>false</default>
+      <summary>Boolean Setting</summary>
+      <description>A setting that can be true or false</description>
+    </key>
+  </schema>
+</schemalist>
+

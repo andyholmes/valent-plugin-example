@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: 2021 Andy Holmes <andrew.g.r.holmes@gmail.com>
+
+
+option('tests',
+         type: 'boolean',
+        value: false,
+  description: 'Build unit tests',
+)
+

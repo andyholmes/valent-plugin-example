@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: No rights reserved
+
+[Plugin]
+Module=@plugin_module@
+Name=Plugin Name
+Description=Plugin Description
+Icon=valent-plugin-@plugin_module@-symbolic
+Authors=@plugin_author@
+Version=@plugin_version@
+Website=@plugin_url@
+X-DevicePluginIncoming=kdeconnect.ping
+X-DevicePluginOutgoing=kdeconnect.ping
+X-DevicePluginSettings=ca.andyholmes.Valent.Plugin.@plugin_module@
+
