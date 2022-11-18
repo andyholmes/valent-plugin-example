@@ -57,20 +57,27 @@ flatpak-builder --force-clean \
 flatpak build-bundle _flatpak_repo --runtime \
                      ca.andyholmes.Valent.Plugin.example.flatpak \
                      ca.andyholmes.Valent.Plugin.example \
-                     stable;
+                     master;
 
 # Install the extension
 flatpak install ca.andyholmes.Valent.Plugin.example.flatpak
 ```
 
-## Status
+## Deployment
 
-Join the community in [Discussions] to ask questions, share ideas and get
-involved in Valent!
+This repository includes a CI workflow that builds a Flatpak bundle for pull
+requests, and a CD workflow that can deploy `x84_64` and `aarch64` builds to a
+repository hosted on GitHub Pages (see the [flatter GitHub Action][flatter] for
+details).
+
+## Getting Help
+
+Join the community in [Discussions][discussions] to ask questions, share ideas
+and get help writing your plugin!
 
 [valent]: https://github.com/andyholmes/valent
 [gnome]: https://www.gnome.org
 [kdeconnect]: https://kdeconnect.kde.org
-
 [nightly-repo]: https://valent.andyholmes.ca/repo/index.flatpakrepo
-
+[flatter]: https://github.com/andyholmes/flatter
+[discussions]: https://github.com/andyholmes/valent/discussions
