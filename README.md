@@ -40,7 +40,7 @@ For those interested in building a Flatpak extension, Valent's
 [nightly repository][nightly-repo] can be used as a source for the runtime:
 
 ```sh
-flatpak remote-add --if-not-exists valent https://valent.andyholmes.ca/repo
+flatpak remote-add --if-not-exists valent https://valent.andyholmes.ca/valent.flatpakrepo
 ```
 
 A Flatpak extension can then be built and installed with `flatpak-builder` and
