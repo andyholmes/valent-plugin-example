@@ -78,6 +78,6 @@ and get help writing your plugin!
 [valent]: https://github.com/andyholmes/valent
 [gnome]: https://www.gnome.org
 [kdeconnect]: https://kdeconnect.kde.org
-[nightly-repo]: https://valent.andyholmes.ca/repo/index.flatpakrepo
+[nightly-repo]: https://valent.andyholmes.ca/valent.flatpakrepo
 [flatter]: https://github.com/andyholmes/flatter
 [discussions]: https://github.com/andyholmes/valent/discussions
