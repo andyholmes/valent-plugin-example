@@ -7,7 +7,7 @@
 #include <gio/gio.h>
 #include <json-glib/json-glib.h>
 #include <libpeas/peas.h>
-#include <libvalent-device.h>
+#include <valent.h>
 
 #include "example-device-plugin.h"
 
