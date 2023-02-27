@@ -7,7 +7,7 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <libpeas/peas.h>
-#include <libvalent-ui.h>
+#include <valent.h>
 
 #include "example-device-preferences-page.h"
 
