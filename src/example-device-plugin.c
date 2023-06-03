@@ -36,7 +36,7 @@ example_device_plugin_handle_ping (ExampleDevicePlugin *self,
     message = _("Ping!");
 
   /* Show a notification */
-  device = valent_device_plugin_get_device (VALENT_DEVICE_PLUGIN (self));
+  device = valent_extension_get_object (VALENT_EXTENSION (self));
   notification = g_notification_new (valent_device_get_name (device));
   g_notification_set_body (notification, message);
   valent_device_plugin_show_notification (VALENT_DEVICE_PLUGIN (self),
@@ -69,20 +69,6 @@ static const GActionEntry actions[] = {
  * ValentDevicePlugin
  */
 static void
-example_device_plugin_enable (ValentDevicePlugin *plugin)
-{
-  g_action_map_add_action_entries (G_ACTION_MAP (plugin),
-                                   actions,
-                                   G_N_ELEMENTS (actions),
-                                   plugin);
-}
-
-static void
-example_device_plugin_disable (ValentDevicePlugin *plugin)
-{
-}
-
-static void
 example_device_plugin_update_state (ValentDevicePlugin *plugin,
                                     ValentDeviceState   state)
 {
@@ -93,7 +79,7 @@ example_device_plugin_update_state (ValentDevicePlugin *plugin,
   available = (state & VALENT_DEVICE_STATE_CONNECTED) != 0 &&
               (state & VALENT_DEVICE_STATE_PAIRED) != 0;
 
-  valent_device_plugin_toggle_actions (plugin, available);
+  valent_extension_toggle_actions (VALENT_EXTENSION (plugin), available);
 }
 
 static void
@@ -117,6 +103,19 @@ example_device_plugin_handle_packet (ValentDevicePlugin *plugin,
  * GObject
  */
 static void
+example_device_plugin_constructed (GObject *object)
+{
+  ValentDevicePlugin *plugin = VALENT_DEVICE_PLUGIN (object);
+
+  g_action_map_add_action_entries (G_ACTION_MAP (plugin),
+                                   actions,
+                                   G_N_ELEMENTS (actions),
+                                   plugin);
+
+  G_OBJECT_CLASS (example_device_plugin_parent_class)->constructed (object);
+}
+
+static void
 example_device_plugin_class_finalize (ExampleDevicePluginClass *klass)
 {
 }
@@ -124,10 +123,11 @@ example_device_plugin_class_finalize (ExampleDevicePluginClass *klass)
 static void
 example_device_plugin_class_init (ExampleDevicePluginClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   ValentDevicePluginClass *plugin_class = VALENT_DEVICE_PLUGIN_CLASS (klass);
 
-  plugin_class->enable = example_device_plugin_enable;
-  plugin_class->disable = example_device_plugin_disable;
+  object_class->constructed = example_device_plugin_constructed;
+
   plugin_class->handle_packet = example_device_plugin_handle_packet;
   plugin_class->update_state = example_device_plugin_update_state;
 }
