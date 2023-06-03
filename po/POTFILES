@@ -5,6 +5,6 @@ data/template.gschema.xml.in
 data/template.metainfo.xml.in.in
 data/template.plugin.desktop.in
 src/example-device-plugin.c
-src/example-device-preferences-page.c
-src/example-device-preferences-page.ui
+src/example-device-preferences-group.c
+src/example-device-preferences-group.ui
 
