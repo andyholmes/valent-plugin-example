@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2022 Andy Holmes <andrew.g.r.holmes@gmail.com>
 
 #include <gio/gio.h>
-#include <libpeas/peas.h>
+#include <libpeas.h>
 
 #include "example-device-plugin.h"
 #include "example-device-preferences-group.h"

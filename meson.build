@@ -114,7 +114,7 @@ gtk_dep = dependency('gtk4', version: '>= 4.6.0')
 jsonglib_dep = dependency('json-glib-1.0', version: '>= 1.6.0')
 libadwaita_dep = dependency('libadwaita-1', version: '>= 1.2.0')
 libebook_dep = dependency('libebook-1.2', version: '>= 3.34')
-libpeas_dep = dependency('libpeas-1.0', version: '>= 1.22.0')
+libpeas_dep = dependency('libpeas-2', version: '>= 2.0.0')
 libvalent_dep = dependency('libvalent-1', version: '>= 1.0.0', required: false)
 
 if not libvalent_dep.found()

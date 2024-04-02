@@ -6,7 +6,7 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <gtk/gtk.h>
-#include <libpeas/peas.h>
+#include <libpeas.h>
 #include <valent.h>
 
 #include "example-device-preferences-group.h"
