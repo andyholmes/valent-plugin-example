@@ -3,7 +3,7 @@
     "branch": "master",
     "runtime": "ca.andyholmes.Valent",
     "runtime-version": "master",
-    "sdk": "org.gnome.Sdk//44",
+    "sdk": "org.gnome.Sdk//46",
     "build-extension": true,
     "appstream-compose": false,
     "cleanup": [],
