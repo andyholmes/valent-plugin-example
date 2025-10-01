@@ -19,7 +19,6 @@ plugin_deps = [
 # translatable strings should also be added to "/po/POTFILES".
 plugin_sources = files([
   'example-device-plugin.c',
-  'example-device-preferences-group.c',
   'example-plugin.c',
 ])
 

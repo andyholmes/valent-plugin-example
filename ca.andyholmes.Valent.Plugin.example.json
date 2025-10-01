@@ -3,7 +3,7 @@
     "branch": "master",
     "runtime": "ca.andyholmes.Valent",
     "runtime-version": "master",
-    "sdk": "org.gnome.Sdk//46",
+    "sdk": "org.gnome.Sdk//49",
     "build-extension": true,
     "appstream-compose": false,
     "cleanup": [],
@@ -21,7 +21,6 @@
                 "--buildtype=debugoptimized"
             ],
             "post-install": [
-                "appstream-compose --basename=ca.andyholmes.Valent.Plugin.example --prefix=${FLATPAK_DEST} --origin=flatpak ca.andyholmes.Valent.Plugin.example",
                 "glib-compile-schemas --targetdir=${FLATPAK_DEST}/lib/valent/plugins/example ${FLATPAK_DEST}/share/glib-2.0/schemas"
             ],
             "sources" : [

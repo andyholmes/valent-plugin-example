@@ -51,13 +51,13 @@ A Flatpak extension can then be built and installed with `flatpak-builder` and
 flatpak-builder --force-clean \
                 --repo _flatpak_repo \
                 _flatpak_builddir \
-                ca.andyholmes.Valent.Plugin.example.json && \
+                ca.andyholmes.Valent.Plugin.example.json
 
 # Export a bundle
 flatpak build-bundle _flatpak_repo --runtime \
                      ca.andyholmes.Valent.Plugin.example.flatpak \
                      ca.andyholmes.Valent.Plugin.example \
-                     master;
+                     master
 
 # Install the extension
 flatpak install ca.andyholmes.Valent.Plugin.example.flatpak

@@ -26,21 +26,21 @@ example_device_plugin_handle_ping (ExampleDevicePlugin *self,
 {
   g_autoptr (GNotification) notification = NULL;
   const char *message;
-  ValentDevice *device;
 
   g_assert (EXAMPLE_IS_DEVICE_PLUGIN (self));
   g_assert (VALENT_IS_PACKET (packet));
 
-  /* Check for the optional message */
+  /* The `kdeconnect.ping` packet has an optional `message` field
+   */
   if (!valent_packet_get_string (packet, "message", &message))
     message = _("Ping!");
 
-  /* Show a notification */
-  device = valent_extension_get_object (VALENT_EXTENSION (self));
-  notification = g_notification_new (valent_device_get_name (device));
+  /* Show a notification for the ping
+   */
+  notification = g_notification_new (_("Example Notification"));
   g_notification_set_body (notification, message);
   valent_device_plugin_show_notification (VALENT_DEVICE_PLUGIN (self),
-                                          "ping",
+                                          "example",
                                           notification);
 }
 
@@ -52,20 +52,35 @@ ping_action (GSimpleAction *action,
              GVariant      *parameter,
              gpointer       user_data)
 {
-  ExampleDevicePlugin *self = EXAMPLE_DEVICE_PLUGIN (user_data);
+  ValentDevicePlugin *plugin = VALENT_DEVICE_PLUGIN (user_data);
+  g_autoptr (JsonBuilder) builder = NULL;
   g_autoptr (JsonNode) packet = NULL;
 
-  g_assert (EXAMPLE_IS_DEVICE_PLUGIN (self));
+  g_assert (VALENT_IS_DEVICE_PLUGIN (plugin));
 
-  packet = valent_packet_new ("kdeconnect.ping");
-  valent_device_plugin_queue_packet (VALENT_DEVICE_PLUGIN (self), packet);
+  /* The general packet format is:
+   *
+   * ```json
+   * {
+   *   id: 0,
+   *   type: "kdeconnect.ping",
+   *   body: { ... }
+   * }
+   * ```
+   */
+  valent_packet_init (&builder, "kdeconnect.ping");
+  json_builder_set_member_name (builder, "message");
+  json_builder_add_string_value (builder, _("Ping!"));
+  packet = valent_packet_end (&builder);
+
+  valent_device_plugin_queue_packet (plugin, packet);
 }
 
 static const GActionEntry actions[] = {
     {"ping", ping_action, NULL, NULL, NULL}
 };
 
-/**
+/*
  * ValentDevicePlugin
  */
 static void
@@ -84,8 +99,8 @@ example_device_plugin_update_state (ValentDevicePlugin *plugin,
 
 static void
 example_device_plugin_handle_packet (ValentDevicePlugin *plugin,
-                                      const char         *type,
-                                      JsonNode           *packet)
+                                     const char         *type,
+                                     JsonNode           *packet)
 {
   ExampleDevicePlugin *self = EXAMPLE_DEVICE_PLUGIN (plugin);
 
@@ -93,7 +108,10 @@ example_device_plugin_handle_packet (ValentDevicePlugin *plugin,
   g_assert (type != NULL);
   g_assert (VALENT_IS_PACKET (packet));
 
-  if (strcmp (type, "kdeconnect.ping") == 0)
+  /* Plugins can register to handle existing types. This plugin sends and
+   * receives packets from the "ping" plugin.
+   */
+  if (g_str_equal (type, "kdeconnect.ping"))
     example_device_plugin_handle_ping (self, packet);
   else
     g_assert_not_reached ();
@@ -107,12 +125,22 @@ example_device_plugin_constructed (GObject *object)
 {
   ValentDevicePlugin *plugin = VALENT_DEVICE_PLUGIN (object);
 
+  G_OBJECT_CLASS (example_device_plugin_parent_class)->constructed (object);
+
+  /* Plugin actions are aggregated by the device
+   */
   g_action_map_add_action_entries (G_ACTION_MAP (plugin),
                                    actions,
                                    G_N_ELEMENTS (actions),
                                    plugin);
 
-  G_OBJECT_CLASS (example_device_plugin_parent_class)->constructed (object);
+  /* Plugin menu items can be registered and will be exported on the session
+   * bus along with the actions.
+   */
+  valent_device_plugin_set_menu_action (plugin,
+                                        "device.example.ping",
+                                        _("Example Action"),
+                                        "dialog-information-symbolic");
 }
 
 static void
