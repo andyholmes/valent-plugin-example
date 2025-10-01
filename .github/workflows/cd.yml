@@ -9,7 +9,7 @@ jobs:
     name: Flatpak
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/andyholmes/flatter/gnome:46
+      image: ghcr.io/andyholmes/flatter/gnome:47
       options: --privileged
     permissions:
       contents: read
@@ -38,7 +38,6 @@ jobs:
         uses: crazy-max/ghaction-import-gpg@v5
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Setup Flatpak
         run: |
