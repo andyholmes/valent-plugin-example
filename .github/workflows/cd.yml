@@ -7,9 +7,9 @@ on:
 jobs:
   flatpak:
     name: Flatpak
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.arch == 'aarch64' && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     container:
-      image: ghcr.io/andyholmes/flatter/gnome:47
+      image: ghcr.io/andyholmes/flatter/gnome:49
       options: --privileged
     permissions:
       contents: read
