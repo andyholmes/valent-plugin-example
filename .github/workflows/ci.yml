@@ -22,6 +22,7 @@ jobs:
           submodules: true
 
       - name: Setup GPG
+        if: ${{ github.triggering_actor == github.repository_owner }}
         id: gpg
         uses: crazy-max/ghaction-import-gpg@v6
         with:
